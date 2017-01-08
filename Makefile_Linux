@@ -10,15 +10,17 @@
 #                                                                              #
 #******************************************************************************#
 
-RC_PATH = ./src/
+SRC_PATH = ./srcs/
 OBJ_PATH = ./obj/
-INC_PATH = ./include/ ./libft ./minilibx/
+INC_PATH = ./includes/ ./libft/ ./libft/includes/  ./minilibx/
 LIB_PATH = ./libft/ ./minilibx/
 
 FRAMEWORK = -lXext -lX11 -lm
 
-SRC_NAME = mlx_tools.c check_env.c set_map_coor.c set_image.c free_memory.c \
-		   bresenham.c main.c map_transform.c
+SRC_NAME = fdf.c fdf_calculate_matrix.c fdf_complem.c\
+		   fdf_draw.c fdf_errors.c fdf_free.c fdf_get_map.c\
+		   fdf_hook.c fdf_hook2.c fdf_matrix.c fdf_parse_map.c\
+		   fdf_set.c get_next_line.c main.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 LIB_NAME = -lft -lmlx
@@ -33,7 +35,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -Ofast
 
 all: lib
-	@echo "\033[37;44m Make $(NAME) \033[0m"
+	@echo -e "\033[37;44m Make $(NAME) \033[0m"
 	@make $(NAME)
 
 $(NAME): $(OBJ)
@@ -42,12 +44,13 @@ $(NAME): $(OBJ)
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $< $(LIB) $(LIB_NAME)
-	.PHONY: lib clean fclean re
+
+.PHONY: lib clean fclean re
 
 lib:
-	@echo "\033[37;44m Make libft \033[0m"
+	@echo -e "\033[37;44m Make libft \033[0m"
 	@make -C ./libft/
-	@echo "\033[37;44m Make minilibx \033[0m"
+	@echo -e "\033[37;44m Make minilibx \033[0m"
 	@make -C ./minilibx/
 
 clean:

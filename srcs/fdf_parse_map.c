@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "fdf.h"
 
 static int		check_width(char *line)
 {
@@ -73,14 +73,14 @@ static int		fdf_height(int fd, int width)
 	distorted_map = 0;
 	while ((ret = get_next_line(fd, &line)))
 	{
-		ft_putendl(line);
+		//ft_putendl(line);
 		if (width != check_width(line))
 			distorted_map = 1;
 		free(line);
 		++height;
 	}
 	free(line);
-	ft_putchar('\n');
+	//ft_putchar('\n');
 	if (distorted_map)
 		ft_putendl("\x1b[33mWarning! Map may be distorted!\x1b[0m");
 	return (height);
@@ -105,6 +105,7 @@ int				parse_map(char *file)
 		return (-2);
 	if ((map->height = fdf_height(fd, map->width)) <= 0)
 		return (-3);
+	ft_printf("HERE\n");
 	if ((map->points = (t_point**)malloc(sizeof(t_point*) * map->height)) \
 			== NULL)
 		return (-1);
@@ -112,5 +113,5 @@ int				parse_map(char *file)
 	map->color = GREEN;
 	if (close(fd) < 0)
 		return (-5);
-	return (get_map(&(*map), file));
+	return (get_map(map, file));
 }
