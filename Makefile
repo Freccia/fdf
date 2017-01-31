@@ -1,29 +1,30 @@
 #******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile_Linux                                     :+:      :+:    :+:    #
+#    Makefile_MacOsX                                    :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: lfabbro <lfabbro@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/04/16 12:24:26 by lfabbro           #+#    #+#              #
-#    Updated: 2016/04/16 12:29:20 by lfabbro          ###   ########.fr        #
+#    Created: 2016/04/16 12:25:58 by lfabbro           #+#    #+#              #
+#    Updated: 2017/01/31 21:08:19 by lfabbro          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 SRC_PATH = ./srcs/
-OBJ_PATH = ./obj/
-INC_PATH = ./includes/ ./libft/ ./libft/includes/  ./minilibx/
-LIB_PATH = ./libft/ ./minilibx/
+OBJ_PATH = ./objs/
+INC_PATH = ./includes/ ./libft ./minilibx_macos/
+LIB_PATH = ./libft/ ./minilibx_macos/
 
-FRAMEWORK = -lXext -lX11 -lm
+FRAMEWORK = -framework OpenGL -framework Appkit
 
-SRC_NAME = fdf.c fdf_calculate_matrix.c fdf_complem.c\
-		   fdf_draw.c fdf_errors.c fdf_free.c fdf_get_map.c\
-		   fdf_hook.c fdf_hook2.c fdf_matrix.c fdf_parse_map.c\
-		   fdf_set.c get_next_line.c main.c
+SRC_NAME =  main.c fdf.c fdf_set.c fdf_complem.c\
+			fdf_parse_map.c fdf_get_map.c\
+			fdf_draw.c fdf_hook.c fdf_hook2.c\
+			fdf_matrix.c fdf_calculate_matrix.c\
+			get_next_line.c fdf_errors.c fdf_free.c\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
-LIB_NAME = -lft -lmlx
+LIB_NAME = -lft -lmlx -lm
 NAME = fdf
 
 SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
@@ -35,23 +36,23 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -Ofast
 
 all: lib
-	@echo -e "\033[37;44m Make $(NAME) \033[0m"
-	@make $(NAME)
+	@echo "\033[35;44m Make $(NAME) \033[0m"
+	make $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(INC) $^ -o $@ $(LIB) $(LIB_NAME) $(FRAMEWORK)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
-	$(CC) $(CFLAGS) $(INC) -o $@ -c $< $(LIB) $(LIB_NAME)
+	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
-.PHONY: lib clean fclean re
+.PHONY: all lib clean fclean re
 
 lib:
-	@echo -e "\033[37;44m Make libft \033[0m"
+	@echo "\033[35;44m Make libft \033[0m"
 	@make -C ./libft/
-	@echo -e "\033[37;44m Make minilibx \033[0m"
-	@make -C ./minilibx/
+	@echo "\033[35;44m Make minilibx \033[0m"
+	@make -C ./minilibx_macos/
 
 clean:
 	rm -rf $(OBJ) $(OBJ_PATH)
@@ -59,7 +60,7 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 	@make -C ./libft/ fclean
-	@make -C ./minilibx/ clean
+	@make -C ./minilibx_macos/ clean
 
 re: fclean
 	@$(MAKE) all

@@ -6,13 +6,13 @@
 #    By: lfabbro <lfabbro@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/16 12:25:58 by lfabbro           #+#    #+#              #
-#    Updated: 2016/04/16 12:29:21 by lfabbro          ###   ########.fr        #
+#    Updated: 2017/01/31 21:08:19 by lfabbro          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-SRC_PATH = ./src/
-OBJ_PATH = ./obj/
-INC_PATH = ./include/ ./libft ./minilibx_macos/
+SRC_PATH = ./srcs/
+OBJ_PATH = ./objs/
+INC_PATH = ./includes/ ./libft ./minilibx_macos/
 LIB_PATH = ./libft/ ./minilibx_macos/
 
 FRAMEWORK = -framework OpenGL -framework Appkit
@@ -37,7 +37,7 @@ CFLAGS = -Wall -Wextra -Werror -Ofast
 
 all: lib
 	@echo "\033[35;44m Make $(NAME) \033[0m"
-	@make $(NAME)
+	make $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(INC) $^ -o $@ $(LIB) $(LIB_NAME) $(FRAMEWORK)
