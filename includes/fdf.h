@@ -30,23 +30,23 @@
 /*
 ** KEYS
 */
-# define ESC_KEY			53
-# define RESET_KEY			18
+# define ESC_KEY			0xff1b
+# define RESET_KEY			0x0072
 
-# define ZOOM_IN_KEY 		24
-# define ZOOM_OUT_KEY		27
+# define ZOOM_IN_KEY 		0x003d
+# define ZOOM_OUT_KEY		0x002d
 
-# define UP_KEY				126
-# define DOWN_KEY			125
-# define LEFT_KEY			123
-# define RIGHT_KEY			124
+# define UP_KEY				0x08fc
+# define DOWN_KEY			0x08fe
+# define LEFT_KEY			0x08fb
+# define RIGHT_KEY			0x08fd
 
-# define ROT_X_U_KEY		12
-# define ROT_X_D_KEY		0
-# define ROT_Y_U_KEY		13
-# define ROT_Y_D_KEY		1
-# define ROT_Z_U_KEY		14
-# define ROT_Z_D_KEY		2
+# define ROT_X_U_KEY		0x0031
+# define ROT_X_D_KEY		0x0032
+# define ROT_Y_U_KEY		0x0033
+# define ROT_Y_D_KEY		0x0034
+# define ROT_Z_U_KEY		0x0035
+# define ROT_Z_D_KEY		0x0036
 
 /*
 ** PADCHAR_COLORS 
